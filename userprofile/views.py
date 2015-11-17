@@ -15,6 +15,14 @@ def showCSGOInventory(request, steamID):
     jsondata = urllib2.urlopen(apiRequest).read()
     #Parsing json to Python Dict
     jsonDecoded = json.loads(jsondata)
+
+    #Get and appends background color for item name
+    
+    for k, v in jsonDecoded["rgDescriptions"].iteritems():
+        for k1 in v["tags"]:
+            if k1.has_key("color"):
+                v["background"] = k1["color"]
+
     #Returns items description to render engine
     return render_to_response("inventory.html", {"items": jsonDecoded["rgDescriptions"]}, context_instance=RequestContext(request))
 

@@ -16,7 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from userprofile.views import showCSGOInventory
+import settings
+from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^inventory/(?P<steamID>.*)$', showCSGOInventory, name="csgo_show_inventory"),
-]
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT}),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
