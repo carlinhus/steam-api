@@ -23,15 +23,24 @@
           <a class="navbar-brand" href="#">Carlinhus Steam</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
+          {% if user.is_authenticated %}
+            <div class="navbar-right navbar-brand">
+              Bienvenido, {{ user.username }} &nbsp;<a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">Cerrar sesión</a>
+            </div>
+          {% else %}
+
+          <form class="navbar-form navbar-right" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            {% csrf_token %}
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="text" placeholder="Usuario" class="form-control" id="id_username" name="username">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Contraseña" class="form-control" id="id_password" name="password">
+              <input type="hidden" name="next" value="{{ request.path }}" />
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" class="btn btn-success">Entrar</button>
           </form>
+          {% endif %}
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
