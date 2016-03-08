@@ -10,16 +10,21 @@
         {% if forloop.first or forloop.counter0|divisibleby:"6" %}
         <div class="row">
         {% endif %}
-        <div class="col-md-2">
-            <img class="img-thumbnail img-responsive" style="width:auto; heigth:auto; background: #dedede;" src="http://cdn.steamcommunity.com/economy/image/{{v.icon_url}}" alt="v.market_name">
-        <p style="font-weight:bold; min-height:40px; color: #{{v.name_color}}; background:#{{v.background}};">{{v.market_name}}</p>
+            <div class="col-md-2">
+                {% if v.actions %}
+                    <a href="{{v.actions.link}}" title="Inspeccionar en el juego" target="_blank">
+                {% endif %}
+                    <img class="img-thumbnail img-responsive" style="width:auto; heigth:auto; background: #dedede;" src="http://cdn.steamcommunity.com/economy/image/{{v.icon_url}}" alt="v.market_name">
+                {% if v.actions %}
+                </a>
+                {% endif %}
+            <p style="font-weight:bold; min-height:40px; color: #{{v.name_color}}; background:#{{v.background}};">{{v.market_name}}</p>
 
-        </div>
-        {% if forloop.last or forloop.counter0|divisibleby:"6" %}
+            </div>
+        {% if forloop.last or forloop.counter|divisibleby:"6" %}
         </div>
         {% endif %}
 
     {% endfor %}
-
 
 {% endblock content %}
