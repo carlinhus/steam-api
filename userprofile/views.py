@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 
 """
-This function uses Steam's API to get Counter Strike Global Offensive inventory of steamID
+This function uses Steam's API to get Counter Strike Global Offensive inventory from steamID
 sent to the function. steamID is a get param on the url.
 """
 def showCSGOInventory(request, steamID):
@@ -16,7 +16,7 @@ def showCSGOInventory(request, steamID):
     #Parsing json to Python Dict
     jsonDecoded = json.loads(jsondata)
 
-    #Get and appends background color for item name
+    #Get and appends actions list and background color to each item
     options = list()
     for k, v in jsonDecoded["rgDescriptions"].iteritems():
         for k1 in v["tags"]:
