@@ -4,27 +4,35 @@
 {% block content %}
 
 
-
-    {% for k, v in items.iteritems %}
-
-        {% if forloop.first or forloop.counter0|divisibleby:"6" %}
+    {% if not items %}
         <div class="row">
-        {% endif %}
-            <div class="col-md-2">
-                {% if v.actions %}
-                    <a href="{{v.actions.link}}" title="Inspeccionar en el juego" target="_blank">
-                {% endif %}
-                    <img class="img-thumbnail img-responsive" style="width:auto; heigth:auto; background: #dedede;" src="http://cdn.steamcommunity.com/economy/image/{{v.icon_url}}" alt="v.market_name">
-                {% if v.actions %}
-                </a>
-                {% endif %}
-            <p style="font-weight:bold; min-height:40px; color: #{{v.name_color}}; background:#{{v.background}};">{{v.market_name}}</p>
-
-            </div>
-        {% if forloop.last or forloop.counter|divisibleby:"6" %}
+            <div class="col-md-12">Compruebe que su inventario está abierto a todo el público (STEAM -> Modificar perfil)</div>
         </div>
-        {% endif %}
+    {% else %}
+        {% for k, v in items.iteritems %}
 
-    {% endfor %}
+            {% if forloop.first or forloop.counter0|divisibleby:"6" %}
+            <div class="row">
+            {% endif %}
+                <div class="col-md-2">
+                    {% if v.actions %}
+                        <a href="{{v.actions.link}}" title="Inspeccionar en el juego">
+                    {% endif %}
+                        <img class="img-thumbnail img-responsive" style="width:auto; heigth:auto; background: #dedede;" src="http://cdn.steamcommunity.com/economy/image/{{v.icon_url}}" alt="v.market_name">
+                    {% if v.actions %}
+                    </a>
+                    {% endif %}
+                <p style="font-weight:bold; min-height:40px; color: #{{v.name_color}}; background:#{{v.background}};">{{v.market_name}}</p>
+
+                </div>
+            {% if forloop.last or forloop.counter|divisibleby:"6" %}
+            </div>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
 
 {% endblock content %}
+
+steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198261246866A5340043410D11962276179814726413
+steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20M11962276179814726413

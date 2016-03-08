@@ -8,3 +8,5 @@ class UserProfile(models.Model):
     )
     steamURL = models.CharField(max_length=255)
     joined_at = models.DateTimeField(auto_now=True)
+    is_steam_linked = models.BooleanField(default=False)
+    steamID = models.CharField(max_length=255)

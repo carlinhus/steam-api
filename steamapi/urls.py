@@ -15,14 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from userprofile.views import showOwnCSGOInventory
+from userprofile.views import *
+
 # from django.conf.urls.defaults import *
-import django.contrib.auth.views
+#import django.contrib.auth.views
 import settings
 from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^inventory/$', showOwnCSGOInventory, name="csgo_show_inventory"),
+    url(r'^login/$', login, name="login"),
+    url(r'^process/$', LoginProcess, name="login"),
+    url(r'^register/$', register, name="register"), 
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT}),
     url('^', include('django.contrib.auth.urls')),
 
