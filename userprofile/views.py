@@ -3,12 +3,15 @@ from django.template import RequestContext
 import urllib2
 from django.http import HttpResponse, JsonResponse
 import json
-
+from django.contrib.auth.decorators import login_required
 """
 This function uses Steam's API to get Counter Strike Global Offensive inventory from steamID
 sent to the function. steamID is a get param on the url.
 """
-def showCSGOInventory(request, steamID):
+@login_required
+def showOwnCSGOInventory(request):
+
+    steamID = request.user.userprofile.steamURL
     #Prepare api request
     apiRequest = urllib2.Request("http://steamcommunity.com/id/" + steamID + "/inventory/json/730/2", headers={"Accept-language" : "es"})
     #Executing api request and saving it as String (JSON format comes)
